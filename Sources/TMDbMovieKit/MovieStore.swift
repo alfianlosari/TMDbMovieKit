@@ -64,9 +64,7 @@ public class MovieStore {
             
             do {
                 let moviesResponse = try self.jsonDecoder.decode(MoviesResponse.self, from: data)
-                DispatchQueue.main.async {
-                    successHandler(moviesResponse)
-                }
+                successHandler(moviesResponse)
             } catch {
                 self.handleError(errorHandler: errorHandler, error: MovieError.serializationError)
             }
@@ -100,9 +98,7 @@ public class MovieStore {
             
             do {
                 let movie = try self.jsonDecoder.decode(Movie.self, from: data)
-                DispatchQueue.main.async {
-                    successHandler(movie)
-                }
+                successHandler(movie)
             } catch {
                 self.handleError(errorHandler: errorHandler, error: MovieError.serializationError)
             }
@@ -152,9 +148,7 @@ public class MovieStore {
             
             do {
                 let moviesResponse = try self.jsonDecoder.decode(MoviesResponse.self, from: data)
-                DispatchQueue.main.async {
-                    successHandler(moviesResponse)
-                }
+                successHandler(moviesResponse)
             } catch {
                 self.handleError(errorHandler: errorHandler, error: MovieError.serializationError)
             }
@@ -165,9 +159,8 @@ public class MovieStore {
 
     
     private func handleError(errorHandler: @escaping(_ error: Error) -> Void, error: Error) {
-        DispatchQueue.main.async {
-            errorHandler(error)
-        }
+        errorHandler(error)
+        
     }
     
 }
