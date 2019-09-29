@@ -22,6 +22,12 @@ public struct Movie: Codable {
         return $0
     }(DateFormatter())
     
+    private static let timeComponentsFormatter: DateComponentsFormatter = {
+        $0.unitsStyle = .abbreviated
+        $0.allowedUnits = [ .hour, .minute, .second ]
+        return $0
+    }(DateComponentsFormatter())
+    
     public let id: Int
     public let title: String
     public let backdropPath: String?
@@ -58,6 +64,28 @@ public struct Movie: Codable {
     
     public var releaseDateText: String {
         return Movie.dateFormatter.string(from: releaseDate)
+    }
+    
+    public var genreText: String? {
+        guard let genres = self.genres else { return nil }
+        return genres.map { $0.name }.joined(separator: ", ")
+    }
+    
+    public var castText: String? {
+        guard let credits = self.credits else { return nil }
+        return credits.cast.map { $0.name }.joined(separator: ", ")
+    }
+    
+    public var crewText: String? {
+        guard let credits = self.credits else { return nil }
+        return credits.crew.map { $0.name }.joined(separator: ", ")
+    }
+    
+    public var runtimeText: String? {
+        guard let runtime = self.runtime else { return nil }
+        return Movie.timeComponentsFormatter.string(from: Double(runtime))
+        
+        
     }
     
 }
