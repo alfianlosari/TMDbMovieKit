@@ -16,9 +16,20 @@ let tmdbStore = MovieStore(apiKey: "Insert API Key in here")
 ```
 2. Fetch Movies based on endpoint
 ```
-
-
-
+tmdbStore.fetchMovies(from: endpoint, successHandler: {[weak self] (response) in
+  let movies = response.results
+  // Movies Fetched from endpoint
+  }) {[weak self] (error) in
+  // Error occured
+  }
+```
+3. Fetch Movies based on id
+```
+tmdbStore.fetchMovie(id: id, successHandler: { [weak self](movie) in
+       // Movie fetched with id
+   }) {[weak self] (error) in
+       // Error Occured
+   }
 ```
 
 
