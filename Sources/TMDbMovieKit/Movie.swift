@@ -17,6 +17,11 @@ public struct MoviesResponse: Codable {
 
 public struct Movie: Codable {
     
+    private static let dateFormatter: DateFormatter = {
+        $0.dateFormat = "MM-dd-YYYY"
+        return $0
+    }(DateFormatter())
+    
     public let id: Int
     public let title: String
     public let backdropPath: String?
@@ -49,6 +54,10 @@ public struct Movie: Codable {
             return acc + "⭐️"
         }
         return ratingText
+    }
+    
+    public var releaseDateText: String {
+        return Movie.dateFormatter.string(from: releaseDate)
     }
     
 }
